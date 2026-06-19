@@ -22,7 +22,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-ai_client = genai.Client()
+render_api_key = os.environ.get("GEMINI_API_KEY", "")
+ai_client = genai.Client(api_key=render_api_key)
 # chroma_client = chromadb.PersistentClient(path="./chroma_db")
 chroma_client = chromadb.EphemeralClient()
 collection = chroma_client.get_or_create_collection(name="unified_knowledge_base")
