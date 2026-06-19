@@ -23,7 +23,8 @@ app.add_middleware(
 )
 
 ai_client = genai.Client()
-chroma_client = chromadb.PersistentClient(path="./chroma_db")
+# chroma_client = chromadb.PersistentClient(path="./chroma_db")
+chroma_client = chromadb.EphemeralClient()
 collection = chroma_client.get_or_create_collection(name="unified_knowledge_base")
 
 MAX_INDEX_LIMIT = 15  # Protective cap to survive free tier quota window limits
@@ -132,7 +133,7 @@ async def import_github_repository(payload: RepoImportRequest):
         raise HTTPException(status_code=500, detail=str(ce))
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
-        
+
 @app.get("/assets")
 async def get_uploaded_assets():
     try:
