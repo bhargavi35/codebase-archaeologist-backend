@@ -8,6 +8,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 from typing import List, Dict
+from pypdf import PdfReader
 import chromadb
 from google import genai
 from google.genai.errors import ClientError
